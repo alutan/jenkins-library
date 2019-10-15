@@ -73,10 +73,10 @@ def call(body) {
   if (registry && !registry.endsWith('/')) registry = "${registry}/"
   def registrySecret = (env.REGISTRY_SECRET ?: "").trim()
   def serviceAccountName = (env.SERVICE_ACCOUNT_NAME ?: "default").trim()
-  def mcReleaseName = (env.RELEASE_NAME).toUpperCase()
+  def mcReleaseName = (env.RELEASE_NAME ?: "").toUpperCase()
   def helmSecret = (env.HELM_SECRET ?: "").trim()
   def libertyLicenseJarBaseUrl = (env.LIBERTY_LICENSE_JAR_BASE_URL ?: "").trim()
-  def mavenSettingsConfigMap = env.MAVEN_SETTINGS_CONFIG_MAP?.trim()
+  def mavenSettingsConfigMap = (env.MAVEN_SETTINGS_CONFIG_MAP ?: "").trim()
   def alwaysPullImage = (env.ALWAYS_PULL_IMAGE == null) ? true : env.ALWAYS_PULL_IMAGE.toBoolean()
   def helmTlsOptions = " --tls --tls-ca-cert=/msb_helm_sec/ca.pem --tls-cert=/msb_helm_sec/cert.pem --tls-key=/msb_helm_sec/key.pem " 
 
