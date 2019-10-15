@@ -91,10 +91,18 @@ def call(body) {
 
   def jobName = (env.JOB_BASE_NAME)
   // E.g. JOB_NAME=default/myproject/master
-  def jobNameSplit = env.JOB_NAME.split("/")	
-  def projectNamespace = jobNameSplit[0]
-  def projectName = jobNameSplit[1]
-  def branchName = jobNameSplit[2]
+  def jobNameSplit = env.JOB_NAME.split("/")
+  
+  def projectNamespace = ""
+  def projectName = ""
+  def branchName = ""
+	
+  if (jobNameSplit.length > 0)
+    projectNamespace = jobNameSplit[0]
+  if (jobNameSplit.length > 1)
+    projectName = jobNameSplit[1]
+  if (jobNameSplit.length > 2)
+    branchName = jobNameSplit[2]
   def testDeployAttempt = 1 // declare here as we'll use again later: don't run tests if it didn't deploy
   def verifyAttempt = 1 // we'll need this variable later too: fail the build if we didn't deploy the test release, or tests failed
 		
